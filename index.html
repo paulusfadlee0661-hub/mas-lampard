@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Kuliner  </title>
+  <style>
+    
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff8f0;
+      color: #333;
+    }
+
+    header {
+      background-color: #b22222;
+      color: #fff8f0;
+      text-align: center;
+      padding: 20px;
+    }
+
+
+    .slider {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+    }
+
+    .slides {
+      display: none;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+
+    .menu-section {
+      margin: 20px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .menu-card {
+      background: #fff8f0;
+      border: 1px solid #f0d7b6;
+      border-radius: 10px;
+      padding: 15px;
+    }
+
+    .menu-card h3 {
+      margin: 0 0 8px;
+      color: #8b0000;
+    }
+
+    .menu-card p {
+      margin: 0 0 8px;
+      color: #555;
+    }
+
+    .menu-price {
+      font-weight: bold;
+      color: #b22222;
+      margin-bottom: 10px;
+    }
+
+    .menu-btn {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .menu-btn:hover {
+      background: #1e7e34;
+    }
+
+    .menu-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .menu-action-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .menu-action-btn {
+      border: none;
+      border-radius: 6px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .btn-bayar {
+      background: #28a745;
+    }
+
+    .btn-bayar:hover {
+      background: #1e7e34;
+    }
+
+    .btn-batal {
+      background: #dc3545;
+    }
+
+    .btn-batal:hover {
+      background: #b02a37;
+    }
+
+    .order-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .order-box {
+      width: min(420px, 92vw);
+      background: #fff;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    .order-box h3 {
+      margin-top: 0;
+      color: #8b0000;
+    }
+
+    .order-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .order-actions button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-pay {
+      background: #28a745;
+      color: #fff;
+    }
+
+    .btn-pay:hover {
+      background: #1e7e34;
+    }
+
+    .btn-close {
+      background: #b22222;
+      color: #fff;
+    }
+
+    .btn-close:hover {
+      background: #8b0000;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Selamat Datang Di Kuliner Orang Adonara</h1>
+    <h2> Adonara Lambunga </h2>
+  </header>
+
+  <!-- Slider -->
+  <section class="slider">
+    <div class="slides fade">
+      <img src="images/makanan 12.jpg" alt="Makanan 12">
+    </div>
+    <div class="slides fade">
+      <img src="images/makanan 3.png" alt="Makanan 3">
+    </div>
+    <div class="slides fade">
+      <img src="images/makanan 4.jpg" alt="Makanan 4">
+    </div>
+  </section>
+
+  <section class="menu-section">
+    <h2>Daftar Makanan dan Harga</h2>
+    <p>Berikut beberapa menu favorit yang bisa Anda pesan:</p>
+    <div class="menu-grid">
+      <article class="menu-card">
+        <h3>Nasi Goreng Spesial</h3>
+        <p>Ayam, telur, dan bumbu khas.</p>
+        <div class="menu-price">Rp 18.000</div>
+        <button class="menu-btn" onclick="openOrder('Nasi Goreng Spesial', 18000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Sate Ayam</h3>
+        <p>10 tusuk sate ayam dengan bumbu kacang.</p>
+        <div class="menu-price">Rp 25.000</div>
+        <button class="menu-btn" onclick="openOrder('Sate Ayam', 25000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Mie Goreng Khas Adonara</h3>
+        <p>Rasa gurih dan pedas khas Adonara.</p>
+        <div class="menu-price">Rp 15.000</div>
+        <button class="menu-btn" onclick="openOrder('Mie Goreng Khas Adonara', 15000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Es Teh Manis</h3>
+        <p>Minuman segar untuk menemani makan.</p>
+        <div class="menu-price">Rp 5.000</div>
+        <button class="menu-btn" onclick="openOrder('Es Teh Manis', 5000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Nasi Campur</h3>
+        <p>Ayam, tempe, sambal, dan sayur segar.</p>
+        <div class="menu-price">Rp 20.000</div>
+        <button class="menu-btn" onclick="openOrder('Nasi Campur', 20000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Bakso Biasa</h3>
+        <p>Bakso urat dengan kuah hangat dan bawang goreng.</p>
+        <div class="menu-price">Rp 12.000</div>
+        <button class="menu-btn" onclick="openOrder('Bakso Biasa', 12000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Pecel Lele</h3>
+        <p>Lele goreng crispy dengan sambal dan nasi.</p>
+        <div class="menu-price">Rp 22.000</div>
+        <button class="menu-btn" onclick="openOrder('Pecel Lele', 22000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Martabak Telur</h3>
+        <p>Martabak isi telur, daun bawang, dan bumbu.</p>
+        <div class="menu-price">Rp 17.000</div>
+        <button class="menu-btn" onclick="openOrder('Martabak Telur', 17000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Ayam Geprek</h3>
+        <p>Ayam crispy dengan sambal pedas dan nasi hangat.</p>
+        <div class="menu-price">Rp 19.000</div>
+        <button class="menu-btn" onclick="openOrder('Ayam Geprek', 19000)">Pesan</button>
+      </article>
+      <article class="menu-card">
+        <h3>Capcay Goreng</h3>
+        <p>Campuran sayur segar dengan saus khas.</p>
+        <div class="menu-price">Rp 16.000</div>
+        <button class="menu-btn" onclick="openOrder('Capcay Goreng', 16000)">Pesan</button>
+      </article>
+    </div>
+  </section>
+
+  <div id="orderModal" class="order-modal" onclick="closeOrderModal(event)">
+    <div class="order-box" onclick="event.stopPropagation()">
+      <h3 id="orderTitle">Pesanan Anda</h3>
+      <p id="orderDetail">Silakan pilih menu.</p>
+      <div class="order-actions">
+        <button class="btn-pay" onclick="bayarDiTempat()">Bayar di Tempat</button>
+        <button class="btn-pay" style="background:#0d6efd;" onclick="bayarDana()">Dana</button>
+        <button class="btn-close" onclick="closeOrderModal()">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Slider otomatis
+  let slideIndex = 0;
+  showSlides();
+  function showSlides() {
+    let slides = document.getElementsByClassName("slides");
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    slides[slideIndex - 1].style.display = "block";
+    setTimeout(showSlides, 3000);
+  }
+
+  let currentOrder = { nama: '', harga: 0 };
+
+  function openOrder(nama, harga) {
+    currentOrder = { nama, harga };
+    const format = new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      maximumFractionDigits: 0
+    }).format(harga);
+
+    document.getElementById('orderTitle').textContent = 'Pesanan: ' + nama;
+    document.getElementById('orderDetail').textContent = 'Total yang harus dibayar: ' + format;
+    document.getElementById('orderModal').style.display = 'flex';
+  }
+
+  function closeOrderModal(event) {
+    if (event && event.target.id !== 'orderModal') return;
+    document.getElementById('orderModal').style.display = 'none';
+  }
+
+  function bukaWhatsApp(pesan) {
+    const nomor = '6281339378844';
+    const waUrl = 'https://wa.me/' + nomor + '?text=' + encodeURIComponent(pesan);
+    const newWindow = window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+    if (!newWindow) {
+      alert('Silakan izinkan popup/browser untuk membuka WhatsApp, lalu coba lagi.');
+      return;
+    }
+  }
+
+  function bayarDiTempat() {
+    if (!currentOrder.nama) {
+      alert('Silakan pilih menu terlebih dahulu.');
+      return;
+    }
+
+    const pesanDasar = 'Halo, saya ingin memesan ' + currentOrder.nama + ' (Rp ' + currentOrder.harga.toLocaleString('id-ID') + '). Bayar di tempat, mohon konfirmasi.';
+
+    document.getElementById('orderModal').style.display = 'none';
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          const lokasi = 'Lokasi saya saat ini: https://www.google.com/maps?q=' + pos.coords.latitude + ',' + pos.coords.longitude;
+          bukaWhatsApp(pesanDasar + '\n' + lokasi);
+        },
+        function () {
+          bukaWhatsApp(pesanDasar + '\nLokasi tidak tersedia saat ini.');
+        },
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 }
+      );
+    } else {
+      bukaWhatsApp(pesanDasar + '\nLokasi tidak tersedia di browser ini.');
+    }
+  }
+
+  function bayarDana() {
+    if (!currentOrder.nama) {
+      alert('Silakan pilih menu terlebih dahulu.');
+      return;
+    }
+
+    const danaDeepLink = 'dana://';
+    const danaFallback = 'https://www.dana.id/';
+
+    document.getElementById('orderModal').style.display = 'none';
+
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = danaDeepLink;
+    document.body.appendChild(iframe);
+
+    setTimeout(function () {
+      window.location.href = danaFallback;
+    }, 800);
+
+    setTimeout(function () {
+      if (iframe.parentNode) {
+        iframe.parentNode.removeChild(iframe);
+      }
+    }, 1500);
+  }
+
+  function shareLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      // Buka Google Maps dengan koordinat pengguna
+      const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+      window.open(mapsUrl, "_blank");
+    }, function(error) {
+      alert("Tidak bisa mendapatkan lokasi. Pastikan GPS aktif.");
+    });
+  } else {
+    alert("Browser Anda tidak mendukung fitur lokasi.");
+  }
+}
+
+
+</script>
+
+</body>
+</html>
